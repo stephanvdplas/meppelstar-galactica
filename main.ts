@@ -12,16 +12,20 @@ radio.onReceivedNumber(function (receivedNumber) {
     }
     if (vijandkogel.get(LedSpriteProperty.X) == ruimteschip.get(LedSpriteProperty.X)) {
         radio.sendString("hit")
-        andergeraakt += 1
+        zelfgeraakt += 1
     }
+    if (zelfgeraakt == max_score) {
+        radio.sendString("af")
+        game.gameOver()
+    }
+    basic.pause(200)
+    vijandkogel.delete()
 })
 input.onButtonPressed(Button.A, function () {
     ruimteschip.change(LedSpriteProperty.X, -1)
     richtingschip = 0
     basic.pause(500)
     richtingschip = 1
-    andergeraakt = 0
-    zelfgeraakt = 0
 })
 input.onButtonPressed(Button.AB, function () {
     jouwkogel = game.createSprite(ruimteschip.get(LedSpriteProperty.X), 3)
@@ -42,6 +46,11 @@ radio.onReceivedString(function (receivedString) {
     if (receivedString == "hit") {
         basic.showIcon(IconNames.Yes)
         basic.pause(200)
+        andergeraakt += 1
+    } else if (receivedString == "af") {
+        basic.showString("You Win!")
+    } else {
+    	
     }
 })
 input.onButtonPressed(Button.B, function () {
@@ -52,18 +61,21 @@ input.onButtonPressed(Button.B, function () {
 })
 let richtingkogel = 0
 let jouwkogel: game.LedSprite = null
-let zelfgeraakt = 0
-let andergeraakt = 0
 let vijandkogel: game.LedSprite = null
 let vijandkogel_richting = 0
 let vijandkogel_x = 0
+let zelfgeraakt = 0
 let richtingschip = 0
+let max_score = 0
 let snelheid = 0
 let ruimteschip: game.LedSprite = null
 radio.setGroup(1)
 ruimteschip = game.createSprite(2, 4)
 snelheid = 10
+max_score = 3
 richtingschip = 1
+let andergeraakt = 0
+zelfgeraakt = 0
 basic.forever(function () {
 	
 })
