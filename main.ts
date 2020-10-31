@@ -1,9 +1,5 @@
 radio.onReceivedNumber(function (receivedNumber) {
-    if (receivedNumber == 1) {
-        jouwkogel.delete()
-        basic.showIcon(IconNames.Yes)
-        andergeraakt += 1
-    } else if (receivedNumber == 2) {
+    if (receivedNumber == 2) {
         basic.showString("You Win!")
     } else {
         vijandkogel_x = 4 - receivedNumber % 5
@@ -18,7 +14,6 @@ radio.onReceivedNumber(function (receivedNumber) {
             vijandkogel.change(LedSpriteProperty.X, 1 - vijandkogel_richting)
         }
         if (vijandkogel.get(LedSpriteProperty.X) == ruimteschip.get(LedSpriteProperty.X)) {
-            radio.sendNumber(1)
             zelfgeraakt += 1
         }
         if (zelfgeraakt == max_score) {
@@ -57,10 +52,10 @@ input.onButtonPressed(Button.B, function () {
     richtingschip = 1
 })
 let richtingkogel = 0
+let jouwkogel: game.LedSprite = null
 let vijandkogel: game.LedSprite = null
 let vijandkogel_richting = 0
 let vijandkogel_x = 0
-let jouwkogel: game.LedSprite = null
 let zelfgeraakt = 0
 let richtingschip = 0
 let max_score = 0
