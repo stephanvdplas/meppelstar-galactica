@@ -45,7 +45,6 @@ input.onButtonPressed(Button.AB, function () {
 radio.onReceivedString(function (receivedString) {
     if (receivedString == "hit") {
         basic.showIcon(IconNames.Yes)
-        basic.pause(200)
         andergeraakt += 1
     } else if (receivedString == "af") {
         basic.showString("You Win!")
