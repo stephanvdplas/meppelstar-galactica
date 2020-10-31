@@ -5,10 +5,10 @@ radio.onReceivedNumber(function (receivedNumber) {
     for (let index = 0; index < 4; index++) {
         basic.pause(5000 / snelheid)
         vijandkogel.change(LedSpriteProperty.Y, 1)
-        vijandkogel.change(LedSpriteProperty.X, 1 - vijandkogel_richting)
         if (vijandkogel.isTouchingEdge()) {
             vijandkogel_richting = 2 - vijandkogel_richting
         }
+        vijandkogel.change(LedSpriteProperty.X, 1 - vijandkogel_richting)
     }
     if (vijandkogel.get(LedSpriteProperty.X) == ruimteschip.get(LedSpriteProperty.X)) {
         radio.sendString("hit")
@@ -33,10 +33,10 @@ input.onButtonPressed(Button.AB, function () {
     for (let index = 0; index < 3; index++) {
         basic.pause(5000 / snelheid)
         jouwkogel.change(LedSpriteProperty.Y, -1)
-        jouwkogel.change(LedSpriteProperty.X, richtingkogel - 1)
         if (jouwkogel.isTouchingEdge()) {
             richtingkogel = 2 - richtingkogel
         }
+        jouwkogel.change(LedSpriteProperty.X, richtingkogel - 1)
     }
     radio.sendNumber(5 * richtingkogel + jouwkogel.get(LedSpriteProperty.X))
     basic.pause(5000 / snelheid)
