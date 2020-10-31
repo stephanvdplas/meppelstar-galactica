@@ -49,8 +49,6 @@ radio.onReceivedString(function (receivedString) {
         andergeraakt += 1
     } else if (receivedString == "af") {
         basic.showString("You Win!")
-    } else {
-    	
     }
 })
 input.onButtonPressed(Button.B, function () {
@@ -76,6 +74,3 @@ max_score = 3
 richtingschip = 1
 let andergeraakt = 0
 zelfgeraakt = 0
-basic.forever(function () {
-	
-})
