@@ -11,7 +11,6 @@ radio.onReceivedNumber(function (receivedNumber) {
         }
     }
     if (vijandkogel.get(LedSpriteProperty.X) == ruimteschip.get(LedSpriteProperty.X)) {
-        radio.sendString("hit")
         zelfgeraakt += 1
     }
     if (zelfgeraakt == max_score) {
@@ -43,9 +42,7 @@ input.onButtonPressed(Button.AB, function () {
     jouwkogel.delete()
 })
 radio.onReceivedString(function (receivedString) {
-    if (receivedString == "hit") {
-        andergeraakt += 1
-    } else if (receivedString == "af") {
+    if (receivedString == "af") {
         basic.showString("You Win!")
     }
 })
