@@ -1,28 +1,25 @@
 radio.onReceivedNumber(function (receivedNumber) {
-    if (receivedNumber == 2) {
-        basic.showString("You Win!")
-    } else {
-        vijandkogel_x = 4 - receivedNumber % 5
-        vijandkogel_richting = 2 - (receivedNumber - receivedNumber % 5) / 5
-        vijandkogel = game.createSprite(vijandkogel_x, 0)
-        for (let index = 0; index < 4; index++) {
-            basic.pause(5000 / snelheid)
-            vijandkogel.change(LedSpriteProperty.Y, 1)
-            if (vijandkogel.isTouchingEdge()) {
-                vijandkogel_richting = 2 - vijandkogel_richting
-            }
-            vijandkogel.change(LedSpriteProperty.X, 1 - vijandkogel_richting)
+    vijandkogel_x = 4 - receivedNumber % 5
+    vijandkogel_richting = 2 - (receivedNumber - receivedNumber % 5) / 5
+    vijandkogel = game.createSprite(vijandkogel_x, 0)
+    for (let index = 0; index < 4; index++) {
+        basic.pause(5000 / snelheid)
+        vijandkogel.change(LedSpriteProperty.Y, 1)
+        vijandkogel.change(LedSpriteProperty.X, 1 - vijandkogel_richting)
+        if (vijandkogel.isTouchingEdge()) {
+            vijandkogel_richting = 2 - vijandkogel_richting
         }
-        if (vijandkogel.get(LedSpriteProperty.X) == ruimteschip.get(LedSpriteProperty.X)) {
-            zelfgeraakt += 1
-        }
-        if (zelfgeraakt == max_score) {
-            radio.sendNumber(2)
-            game.gameOver()
-        }
-        basic.pause(200)
-        vijandkogel.delete()
     }
+    if (vijandkogel.get(LedSpriteProperty.X) == ruimteschip.get(LedSpriteProperty.X)) {
+        radio.sendString("hit")
+        zelfgeraakt += 1
+    }
+    if (zelfgeraakt == max_score) {
+        radio.sendString("af")
+        game.gameOver()
+    }
+    basic.pause(200)
+    vijandkogel.delete()
 })
 input.onButtonPressed(Button.A, function () {
     ruimteschip.change(LedSpriteProperty.X, -1)
@@ -36,14 +33,21 @@ input.onButtonPressed(Button.AB, function () {
     for (let index = 0; index < 3; index++) {
         basic.pause(5000 / snelheid)
         jouwkogel.change(LedSpriteProperty.Y, -1)
+        jouwkogel.change(LedSpriteProperty.X, richtingkogel - 1)
         if (jouwkogel.isTouchingEdge()) {
             richtingkogel = 2 - richtingkogel
         }
-        jouwkogel.change(LedSpriteProperty.X, richtingkogel - 1)
     }
     radio.sendNumber(5 * richtingkogel + jouwkogel.get(LedSpriteProperty.X))
     basic.pause(5000 / snelheid)
     jouwkogel.delete()
+})
+radio.onReceivedString(function (receivedString) {
+    if (receivedString == "hit") {
+        andergeraakt += 1
+    } else if (receivedString == "af") {
+        basic.showString("You Win!")
+    }
 })
 input.onButtonPressed(Button.B, function () {
     ruimteschip.change(LedSpriteProperty.X, 1)
