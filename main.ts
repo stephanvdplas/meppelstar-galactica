@@ -1,6 +1,6 @@
 radio.onReceivedNumber(function (receivedNumber) {
-    vijandkogel_x = receivedNumber % 5
-    vijandkogel_richting = (receivedNumber - receivedNumber % 5) / 5
+    vijandkogel_x = 4 - receivedNumber % 5
+    vijandkogel_richting = 2 - (receivedNumber - receivedNumber % 5) / 5
     vijandkogel = game.createSprite(vijandkogel_x, 0)
     for (let index = 0; index < 4; index++) {
         basic.pause(5000 / snelheid)
