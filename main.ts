@@ -3,7 +3,7 @@ radio.onReceivedNumber(function (receivedNumber) {
     vijandkogel_richting = 2 - (receivedNumber - receivedNumber % 5) / 5
     vijandkogel = game.createSprite(vijandkogel_x, 0)
     for (let index = 0; index < 4; index++) {
-        basic.pause(5000 / snelheid)
+        basic.pause(500)
         vijandkogel.change(LedSpriteProperty.Y, 1)
         vijandkogel.change(LedSpriteProperty.X, 1 - vijandkogel_richting)
         if (vijandkogel.isTouchingEdge()) {
@@ -30,7 +30,7 @@ input.onButtonPressed(Button.AB, function () {
     jouwkogel = game.createSprite(ruimteschip.get(LedSpriteProperty.X), 3)
     richtingkogel = richtingschip
     for (let index = 0; index < 3; index++) {
-        basic.pause(5000 / snelheid)
+        basic.pause(500)
         jouwkogel.change(LedSpriteProperty.Y, -1)
         jouwkogel.change(LedSpriteProperty.X, richtingkogel - 1)
         if (jouwkogel.isTouchingEdge()) {
@@ -38,7 +38,7 @@ input.onButtonPressed(Button.AB, function () {
         }
     }
     radio.sendNumber(5 * richtingkogel + jouwkogel.get(LedSpriteProperty.X))
-    basic.pause(5000 / snelheid)
+    basic.pause(500)
     jouwkogel.delete()
 })
 radio.onReceivedString(function (receivedString) {
@@ -60,11 +60,9 @@ let vijandkogel_x = 0
 let zelfgeraakt = 0
 let richtingschip = 0
 let max_score = 0
-let snelheid = 0
 let ruimteschip: game.LedSprite = null
 radio.setGroup(1)
 ruimteschip = game.createSprite(2, 4)
-snelheid = 10
 max_score = 3
 richtingschip = 1
 let andergeraakt = 0
